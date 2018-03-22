@@ -20,7 +20,7 @@ class merchandise:
 
     def __init__(self, n):
         self.name = n
-
+        
     def computeAverage(self):
         self.average = self.buy/self.sum
 
