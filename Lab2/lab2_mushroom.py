@@ -31,8 +31,6 @@ def train_model(n=7000):
     # Lastly, return the test sets and the trained model
     return (X_test, Y_test, clf)
 
-X_test, Y_test, clf = train_model()
-
 import sklearn.metrics as metrics
 
 sizes = np.arange(100,len(y), 500)
@@ -69,7 +67,6 @@ def train_model_knn(n=7000):
     # Lastly, return the test sets and the trained model
     return (X_test, Y_test, knn)
 
-X_test, Y_test, knn = train_model()
 
 sizes = np.arange(100,len(y), 500)
 result = {}

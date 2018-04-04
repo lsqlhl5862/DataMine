@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 from sklearn import tree
@@ -32,19 +31,50 @@ def train_model(n=1000):
     # Lastly, return the test sets and the trained model
     return (X_test, Y_test, clf)
 
-X_test, Y_test, clf = train_model()
-
-print(X_test)
-print(Y_test)
 import sklearn.metrics as metrics
 
-sizes = np.arange(100,len(y), 500)
+sizes = np.arange(50,len(y), 50)
 result = {}
 for size in sizes:
     X_test, Y_test, clf = train_model(n=size)
     score     = clf.score(X_test, Y_test)
-    precision = metrics.precision_score(Y_test, clf.predict(X_test))
-    recall    = metrics.recall_score(Y_test, clf.predict(X_test))
+    precision = metrics.precision_score(Y_test, clf.predict(X_test),average='micro')
+    recall    = metrics.recall_score(Y_test, clf.predict(X_test),average='micro')
+    result[size] = (score, precision, recall)
+# Turn the results into a DataFrame
+# Transposing is needed (you tryout without it)
+result = pd.DataFrame(result).transpose()
+result.columns = ['Accuracy', 'Precision', 'Recall']
+result.plot(marker='*', figsize=(15,5))
+plt.xlabel('Size of training set')
+plt.ylabel('Value')
+plt.show()
+
+
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier()
+knn.fit(X, y)
+
+def train_model_knn(n=1400):
+    # Given X_dummy and Y_dummy, split naively into training and testing sets
+    X_train, X_test, Y_train, Y_test = naive_split(X, y, n)
+    # Instantiate a default decision tree with fixed random state
+    # NOTE: In real life you'd probably want to remove the fixed seed.
+    knn = KNeighborsClassifier()
+    # Next, train a default decision tree using the training sets
+    knn.fit(X_train, Y_train)
+    # Lastly, return the test sets and the trained model
+    return (X_test, Y_test, knn)
+
+X_test, Y_test, knn = train_model()
+
+sizes = np.arange(50,len(y), 50)
+result = {}
+for size in sizes:
+    X_test, Y_test, knn = train_model_knn(n=size)
+    score     = knn.score(X_test, Y_test)
+    precision = metrics.precision_score(Y_test, knn.predict(X_test),average='micro')
+    recall    = metrics.recall_score(Y_test, knn.predict(X_test),average='micro')
     result[size] = (score, precision, recall)
 # Turn the results into a DataFrame
 # Transposing is needed (you tryout without it)
