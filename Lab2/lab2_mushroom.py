@@ -42,7 +42,6 @@ for size in sizes:
     recall    = metrics.recall_score(Y_test, clf.predict(X_test))
     result[size] = (score, precision, recall)
 # Turn the results into a DataFrame
-# Transposing is needed (you tryout without it)
 result = pd.DataFrame(result).transpose()
 result.columns = ['Accuracy', 'Precision', 'Recall']
 result.plot(marker='*', figsize=(15,5))
@@ -77,7 +76,6 @@ for size in sizes:
     recall    = metrics.recall_score(Y_test, knn.predict(X_test))
     result[size] = (score, precision, recall)
 # Turn the results into a DataFrame
-# Transposing is needed (you tryout without it)
 result = pd.DataFrame(result).transpose()
 result.columns = ['Accuracy', 'Precision', 'Recall']
 result.plot(marker='*', figsize=(15,5))

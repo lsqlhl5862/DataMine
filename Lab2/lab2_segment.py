@@ -21,7 +21,6 @@ def naive_split(X, Y, n):
     return (X_train, X_test, Y_train, Y_test)
 
 def train_model(n=1000):
-    # Given X_dummy and Y_dummy, split naively into training and testing sets
     X_train, X_test, Y_train, Y_test = naive_split(X, y, n)
     # Instantiate a default decision tree with fixed random state
     # NOTE: In real life you'd probably want to remove the fixed seed.
@@ -42,7 +41,6 @@ for size in sizes:
     recall    = metrics.recall_score(Y_test, clf.predict(X_test),average='micro')
     result[size] = (score, precision, recall)
 # Turn the results into a DataFrame
-# Transposing is needed (you tryout without it)
 result = pd.DataFrame(result).transpose()
 result.columns = ['Accuracy', 'Precision', 'Recall']
 result.plot(marker='*', figsize=(15,5))
@@ -56,7 +54,6 @@ knn = KNeighborsClassifier()
 knn.fit(X, y)
 
 def train_model_knn(n=1400):
-    # Given X_dummy and Y_dummy, split naively into training and testing sets
     X_train, X_test, Y_train, Y_test = naive_split(X, y, n)
     # Instantiate a default decision tree with fixed random state
     # NOTE: In real life you'd probably want to remove the fixed seed.
@@ -77,7 +74,6 @@ for size in sizes:
     recall    = metrics.recall_score(Y_test, knn.predict(X_test),average='micro')
     result[size] = (score, precision, recall)
 # Turn the results into a DataFrame
-# Transposing is needed (you tryout without it)
 result = pd.DataFrame(result).transpose()
 result.columns = ['Accuracy', 'Precision', 'Recall']
 result.plot(marker='*', figsize=(15,5))
