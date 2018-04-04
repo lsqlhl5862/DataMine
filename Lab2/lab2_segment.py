@@ -12,12 +12,17 @@ from sklearn.tree import DecisionTreeClassifier as DTC
 X = df.iloc[:, 0:19]
 y = df.iloc[:, 19]
 
+df_test = pd.read_csv("segment-test.txt", skiprows=106,header=None)
+df_test.replace(["brickface","sky","foliage","cement","window","path","grass"], [1,2,3,4,5,6,7],inplace=True)
+x_test = df_test.iloc[:, 0:19]
+y_test = df_test.iloc[:, 19]
+
 def naive_split(X, Y, n):
     # Take first n lines of X and Y for training and the rest for testing
     X_train = X[:n]
-    X_test  = X[n:]
+    X_test  = x_test
     Y_train = Y[:n]
-    Y_test  = Y[n:]
+    Y_test  = y_test
     return (X_train, X_test, Y_train, Y_test)
 
 def train_model(n=1000):
