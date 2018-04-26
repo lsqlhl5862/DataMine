@@ -48,6 +48,7 @@ for size in sizes:
 # Turn the results into a DataFrame
 result = pd.DataFrame(result).transpose()
 result.columns = ['Accuracy', 'Precision', 'Recall']
+print(result)
 result.plot(marker='*', figsize=(15,5))
 plt.xlabel('Size of training set')
 plt.ylabel('Value')
