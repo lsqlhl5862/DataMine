@@ -11,10 +11,13 @@ import random as random
 
 
 df_train = pd.read_csv("glass.test", skiprows=1, header=None)
-# df_test[9]=LabelEncoder().fit_transform(df_test[9].values)
+df_train[9]=LabelEncoder().fit_transform(df_train[9].values)
+df_train[9].replace([0,1,2,3,4,5], [0,0,1,1,1,0],inplace=True)
 
 df = pd.read_csv("glass.data", skiprows=1, header=None)
-# df[9]=LabelEncoder().fit_transform(df[9].values)
+df[9]=LabelEncoder().fit_transform(df[9].values)
+df[9].replace([0,1,2,3,4,5], [0,0,1,1,1,0],inplace=True)
+
 
 
 def bagging(df_train,df_test, sampleTimes, trainTimes):
@@ -22,7 +25,6 @@ def bagging(df_train,df_test, sampleTimes, trainTimes):
     result_knn=pd.DataFrame(data=0,index=range(0,len(df_test)),columns=df_test[df_test.columns[-1]].unique())
     vote_result=[]
     vote_result_knn=[]
-    #初始化
     for i in range(0, trainTimes):
         df_temp = df_train.iloc[0:1, :]
         # 随机采样        
@@ -91,7 +93,7 @@ plt.xlabel('Size of training set')
 plt.ylabel('Value')
 plt.show()
 
-#比较数据集大小相同时，弱分类器数量不同导致的结果差异
+#比较数据集大小相同时，弱分类器数量不同导致的结果差异比较数据集大小相同时，弱分类器数量不同导致的结果差异
 sizes = np.arange(10,150,10)
 result = {}
 for size in sizes:

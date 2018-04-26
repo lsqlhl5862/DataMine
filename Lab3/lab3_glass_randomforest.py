@@ -23,7 +23,6 @@ def bagging(df_train,df_test, sampleTimes, trainTimes):
     result_entropy=pd.DataFrame(data=0,index=range(0,len(df_test)),columns=df_test[df_test.columns[-1]].unique())
     vote_result=[]
     vote_result_entropy=[]
-    #初始化
     for i in range(0, trainTimes):
         df_temp = df_train.iloc[0:1, :]
         # 随机采样        
