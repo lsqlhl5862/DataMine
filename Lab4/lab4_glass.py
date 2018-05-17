@@ -16,7 +16,6 @@ from sklearn.decomposition import PCA
 from time import time   
 
 df_train = pd.read_csv("glass.test", skiprows=1, header=None)
-# df_test[9]=LabelEncoder().fit_transform(df_test[9].values)
 
 df = pd.read_csv("glass.data", skiprows=1, header=None)
 df[9]=LabelEncoder().fit_transform(df[9].values)
@@ -37,7 +36,6 @@ y_pred=clf.predict(x_test)
 
 
 x=PCA(n_components = 2).fit_transform(x_test)
-
 
 plt.scatter(x[:, 0], x[:, 1], c=y_pred)
 plt.title("K-Means")

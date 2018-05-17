@@ -32,7 +32,7 @@ x_train = iris.data
 x_test=iris.data
 y_test=iris.target.tolist()
 # K-Means
-clf = KMeans(n_clusters=6, random_state=random_state)
+clf = KMeans(n_clusters=3, random_state=random_state)
 
 clf.fit(x_train)
 y_pred=clf.predict(x_test)
@@ -133,7 +133,7 @@ plt.title("DBSCAN")
 plt.show()
 #AgglomerativeClustering
 from sklearn.neighbors import kneighbors_graph
-clf=AgglomerativeClustering(n_clusters=6,linkage='ward')
+clf=AgglomerativeClustering(n_clusters=3,linkage='ward')
 clf.fit(x_train)
 y_pred=clf.fit_predict(x_test)
 
